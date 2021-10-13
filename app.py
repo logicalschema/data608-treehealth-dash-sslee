@@ -128,9 +128,33 @@ dash_app.layout = html.Div(
                          build_banner(),
                          html.P(
                             id="instructions",
-                            children=["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."]
+                            children=[
+                                "This Dash app utilizes data from ",
+                                html.A(
+                                    "NYC's 2015 Street Tree Census",
+                                    href='https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh'
+                                    ),
+                                ". This is designed for an arborist studying the health of various tree species across each borough.",
+                                " The app displays information about the health of the trees based upon borough and steward activity. ",
+                                "The graphs will dynamically update based upon the species, borough, and stewards selected.",
+                                html.Br(),
+                                html.Br(),
+                                "This app is hosted on ",
+                                html.A(
+                                    "Azure's cloud platform (https://portal.azure.com)",
+                                    href='https://portal.azure.com'
+                                    ),
+                                ". The Github for this application is here ",
+                                html.A(
+                                    "https://github.com/logicalschema/data608-treehealth-dash-sslee",
+                                    href='https://github.com/logicalschema/data608-treehealth-dash-sslee'
+                                    ),
+                                ".",
+                                html.Br(),
+                                html.Br(),
+                            ],
                          ),
-                         build_graph_title("Species"),
+                         build_graph_title(html.B("Species")),
                          dcc.Dropdown(
                            id="spc-dropdown",
                            options=[
@@ -139,7 +163,7 @@ dash_app.layout = html.Div(
                            multi=True,
                            value=[spc[0], spc[1], spc[52]],
                            ),
-                         build_graph_title("Borough(s)"),
+                         build_graph_title(html.B("Borough(s)")),
                          dcc.Dropdown(
                            id="borough-dropdown",
                            options=[
@@ -148,7 +172,7 @@ dash_app.layout = html.Div(
                            multi=True,
                            value=[boro[0], boro[1], boro[2], boro[3], boro[4]]
                            ),
-                         build_graph_title("Steward(s)"),
+                         build_graph_title(html.B("Steward(s)")),
                          dcc.Slider(
                            id="steward-slider",
                            min=0,
@@ -171,14 +195,16 @@ dash_app.layout = html.Div(
                      id="top-row-graphs",
                      children=[
 
-                          html.Div(
-                            id="map",
-                            className="row",
-                            children=[
-                            # dcc Graph here
-                               dcc.Graph(id='map-graph')
-                            ]
+                          dcc.Loading(
+                            html.Div(
+                              id="map",
+                              className="row",
+                              children=[
+                              # dcc Graph here
+                                 dcc.Graph(id='map-graph')
+                              ]
 
+                            )
                           )
                      ]
                   ),
@@ -200,7 +226,7 @@ dash_app.layout = html.Div(
                          build_graph_title("Tree Health and Stewardship"),
                          dcc.Graph(id='form-bar-graph'),
                      ]
-                     ),
+                  ),
                   html.Div(
                      className="column",
                      id="form-text-container",
