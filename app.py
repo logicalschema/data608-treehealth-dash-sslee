@@ -7,6 +7,7 @@ from dash.dependencies import Input, Output, State
 import plotly.express as px
 import plotly.graph_objs as go
 
+
 # For map
 import datashader as ds
 import datashader.transfer_functions as tf
@@ -16,17 +17,30 @@ import datashader.transfer_functions as tf
 
 
 
+# external JavaScript files
+external_scripts = [
+    {
+        'src': 'https://www.googletagmanager.com/gtag/js?id=G-ET46TBPVET',
+    }
+]
+
+
 # app initialize
 dash_app = dash.Dash(
     __name__,
+    external_scripts=external_scripts,
     meta_tags=[
         {"name": "viewport", "content": "width=device-width, initial-scale=1.0"}
     ],
+
 )
 
 
 app = dash_app.server
 dash_app.config["suppress_callback_exceptions"] = True
+dash_app.title = 'NYC Tree Health 2015'
+dash_app._favicon = ('assets/favicon.ico')
+
 
 # Load data
 # You can download the data here: https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh
@@ -99,7 +113,7 @@ def build_graph_title(title):
 
 
 dash_app.layout = html.Div(
-  children=[ 
+  children=[
     html.Div(
         id="top-row",
         children=[
@@ -198,7 +212,7 @@ dash_app.layout = html.Div(
               ]
               )
       ]
-      )
+      ),
 ])
 
 
