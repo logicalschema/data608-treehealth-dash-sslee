@@ -154,6 +154,17 @@ dash_app.layout = html.Div(
                                 html.Br(),
                             ],
                          ),
+                         html.Hr(className="divider"),
+                         html.B("Color Key"),
+                         html.Div(style={'display': 'flex', 'justify-content': 'space-between'},
+                            children=[
+                                html.P("Poor", style={'color':'red'}),
+                                html.P("Fair", style={'color':'orange'}),
+                                html.P("Good", style={'color':'green'})
+                            ]
+                            ),
+                         html.Hr(className="divider"),
+
                          build_graph_title(html.B("Species")),
                          dcc.Dropdown(
                            id="spc-dropdown",
@@ -232,7 +243,7 @@ dash_app.layout = html.Div(
                      id="form-text-container",
                      children=[
                          html.P(
-                            id="lower-text-box"                         ),
+                            id="lower-text-box"),
                      ],
                   ),
               ]
@@ -277,10 +288,12 @@ def update_bar(spc_dropdow_name, borough_dropdown, steward_slider):
      title="Trees Organized by Health and Stewardship"
    )
 
+
+
    fig.update_layout(
      plot_bgcolor="rgba(0, 0, 0, 0)",
      yaxis_type="log", 
-     barmode='group'
+     barmode='group',
     )
 
 
@@ -334,7 +347,7 @@ def update_map(spc_dropdow_name, borough_dropdown, steward_slider):
                           }
                       ],
                       width=800,
-                      height=800
+                      height=800,
     )
 
     return fig

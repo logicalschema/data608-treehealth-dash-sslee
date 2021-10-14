@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700');
 
-
+hr.divider {
+    height: 5px;
+    background-color: #636466;
+    border: none;
+}
 .graph-title {
     font-size: 1rem;
 }
