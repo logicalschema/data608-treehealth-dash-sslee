@@ -70,7 +70,7 @@ Sung Lee
 
 ## License
 
-This project is licensed under the [mit] License - see the LICENSE.md file for details
+This project is licensed under the [mit] License - see the LICENSE file for details
 
 ## Acknowledgments
 
